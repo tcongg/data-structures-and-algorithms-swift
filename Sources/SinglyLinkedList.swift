@@ -21,7 +21,7 @@ final class SinglyLinkedList: ExpressibleByArrayLiteral {
 
     subscript(index: Int) -> Int? {
         get {
-            return value(at: index)
+            return node(at: index).value
         }
     }
 
@@ -164,22 +164,4 @@ final class SinglyLinkedList: ExpressibleByArrayLiteral {
 
         return node
     }
-
-    // Get value of element at given index in list. If given index is invalid then nothing change
-    private func value(at index: Int) -> Int? {
-        if !isValid(index) || index == size {
-            return nil
-        }
-        
-        var node = head
-        for i in 0..<size {
-            if (i == index) {
-                return node!.value
-            }
-            node = node!.next
-        }
-
-        return nil
-    }
-
 }
