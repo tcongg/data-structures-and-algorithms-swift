@@ -15,6 +15,12 @@ final class HashTable: ExpressibleByDictionaryLiteral {
     private static let capacity = 11
     private var bucket: [Node?] = Swift.Array(repeating: nil, count: HashTable.capacity)
 
+    required init(dictionaryLiteral elements: (String, Int)...) {
+        for (key, value) in elements {
+            add(value, with: key)
+        }
+    }
+
     subscript(_ key: String) -> Int? {
         get {
             return get(key)
@@ -25,12 +31,6 @@ final class HashTable: ExpressibleByDictionaryLiteral {
             } else {
                 remove(key)
             }
-        }
-    }
-
-    required init(dictionaryLiteral elements: (String, Int)...) {
-        for (key, value) in elements {
-            add(value, with: key)
         }
     }
 
@@ -67,6 +67,7 @@ final class HashTable: ExpressibleByDictionaryLiteral {
         }
         node.next = newNode
     }
+
     // Returns value of given key. If item do not exists then returns nil
     func get(_ key: String) -> Int? {
         let index = hash(key)
@@ -81,6 +82,7 @@ final class HashTable: ExpressibleByDictionaryLiteral {
 
         return nil
     }
+    
     // Removes item from hashtable
     func remove(_ key: String) {
         let index = hash(key)
